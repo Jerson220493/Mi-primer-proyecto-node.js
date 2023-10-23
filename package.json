@@ -1,0 +1,27 @@
+{
+  "name": "mi-primer-proyecto-node",
+  "version": "1.0.0",
+  "description": "Mi primer proyecto node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jerson220493/Mi-primer-proyecto-node.js.git"
+  },
+  "keywords": [
+    "MVC",
+    "node",
+    "react"
+  ],
+  "author": "Jerson Gomez Duarte",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jerson220493/Mi-primer-proyecto-node.js/issues"
+  },
+  "homepage": "https://github.com/Jerson220493/Mi-primer-proyecto-node.js#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
