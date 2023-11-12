@@ -3,7 +3,7 @@
 */
 
 import express from "express"; // importamos la libreria
-import { formularioLogin, formularioRegistro } from "../controllers/usuarioController.js";
+import { formularioLogin, formularioRegistro, formularioRecuperarPass } from "../controllers/usuarioController.js";
 
 const router = express.Router();
 
@@ -25,6 +25,7 @@ const router = express.Router();
 // manejo del template engine
 router.get('/login', formularioLogin)
 router.get('/registro', formularioRegistro )
+router.get('/recuperar_pass', formularioRecuperarPass )
 
 
 

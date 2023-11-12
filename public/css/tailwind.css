@@ -1,0 +1,5 @@
+
+/* DIRECTIVAS NECESARIAS PARA EL FUNCIONAMIENTO DE TAILWIND */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

@@ -10,3 +10,31 @@ APIS -> nuevos proyectos
 
 MVC -> model view controller
 
+tailwind css 
+instalacion npm i -D tailwindcss autoprefixer postcss postcss-cli
+revisar muy bien que queden bien instaladas en el package 
+en el index marcar la carpeta publica donde creamos la carpeta css
+en la carpeta css crear el archivo tailwind.css y colocar sus tres directivas
+ejecutar npx tailwindcss init -p
+    con esto creamos dos packages mirar el de tailwind css en content colcoar las vistas donde esta el HTML
+    con esto escaneamos todos los archivos para compilar el archivo css
+    despues en package principal agregamos un scrip nuevo 
+        "css" : "postcss public/css/tailwind.css -o public/css/app.css --watch"
+    en los archivos pug se debe agregar los layouts con la referencia a la hoja de estilos app.css
+
+pug 
+    py pading
+    my margin
+
+ORM  object Relational mapping
+    los datos de una base de dato son tratados como objetos
+    node 
+        prisma
+        sequelize
+        mongoose
+        type ORM
+        bookshlef
+    instalar un ORM
+         npm i sequelize mysql2
+
+variables de entorno
