@@ -38,3 +38,4 @@ ORM  object Relational mapping
          npm i sequelize mysql2
 
 variables de entorno
+express validator dependencia para validar los datos del formulario
