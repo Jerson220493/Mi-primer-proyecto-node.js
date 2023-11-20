@@ -42,7 +42,7 @@ app.use(express.static('public'))
 app.use('/auth', usuariosRoutes);  // cuando se usa use se busca patrones de ruta
 
 // Definir un puerto y arrancar el proyecto
-const port = 3000;
+const port = process.env.PORT || 3000;
 app.listen(port, ()=>{
     console.log(`El puerto esta funcionando correctamente ${port}`)
 })

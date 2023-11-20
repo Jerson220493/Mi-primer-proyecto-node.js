@@ -39,3 +39,4 @@ ORM  object Relational mapping
 
 variables de entorno
 express validator dependencia para validar los datos del formulario
+hashear el password es encriptarlo eso lo hacemos en el modelo dependencia bycript

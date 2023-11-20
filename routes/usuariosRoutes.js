@@ -3,7 +3,8 @@
 */
 
 import express from "express"; // importamos la libreria
-import { formularioLogin, formularioRegistro, formularioRecuperarPass, registrar } from "../controllers/usuarioController.js";
+import { formularioLogin, formularioRegistro, formularioRecuperarPass, registrar, confirma } from "../controllers/usuarioController.js";
+
 
 const router = express.Router();
 
@@ -27,7 +28,7 @@ router.get('/login', formularioLogin)
 router.get('/registro', formularioRegistro )
 router.post('/registro', registrar )
 router.get('/recuperar_pass', formularioRecuperarPass )
-
+router.get('/confirma/:token', confirma)
 
 
 // router.post('/', (req, res)=>{
