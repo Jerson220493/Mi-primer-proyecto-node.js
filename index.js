@@ -1,5 +1,3 @@
-// crear la app
-/*comon js*/
 // const express = require('express')  
 
 /*emascripts modules*/

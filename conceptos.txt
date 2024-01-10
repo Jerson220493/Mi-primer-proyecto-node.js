@@ -1,7 +1,25 @@
-Routes -> rutas que redireccionan 
-dependencias -> existen dos tipos dependencias de produccion y dependencias de desarrollo 
+* Node es un entorno de ejecucion orientado a eventos asincronos, codigo de es6+
+* Npm es el gestor de paquetes
+* Express en un framework para node js que no tiene tantas dependencias como por ejemplo laravel o dijango dejando a libertad del la persona que utiliza instalar las depencias necesarias ¿ que incluye ?
+    -> Routes -> rutas que redireccionan 
+    -> Manejo de errores
+    -> middleware
+    -> soporta los diferentes metodos http
+
+¿ Como inicializar node ? 
+npm init -> con este codigo se crea el package json
+
+¿ Dependencias ? 
+existen dos tipos dependencias de produccion y dependencias de desarrollo 
+
 npm -> es el gestor de paquetes de node, se pueden ver los paquetes en la pagina web 
     npm i _nombre del paquete  // para instalar
+    npm i -D nombre del paquete // cuando la dependencia es de desarrollo 
+
+**************** DEPENDENCIAS ***********************
+express -> crea el servidor 
+Nodemon -> refresca el servidor local cuando hacemos cambios dependencia de desarrollo
+
 Template engine -> Motor de plantilla son tecnologias que nos permiten crear el codigo HTML y mostrar 
 informacion contenida en variables de una forma mas completa y clara
 
