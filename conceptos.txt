@@ -20,6 +20,11 @@ npm -> es el gestor de paquetes de node, se pueden ver los paquetes en la pagina
 express -> crea el servidor 
 Nodemon -> refresca el servidor local cuando hacemos cambios dependencia de desarrollo
 
+**************** IMPORTACION DE DEPENDENCIAS ****************
+const express = require('express')  // esta es la manera anterior commonjs
+import express from 'express'  // esta la manera moderna de importar las dependencias con la notacion ems6
+
+
 Template engine -> Motor de plantilla son tecnologias que nos permiten crear el codigo HTML y mostrar 
 informacion contenida en variables de una forma mas completa y clara
 
