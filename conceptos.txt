@@ -54,6 +54,18 @@ ejecutar npx tailwindcss init -p
         "css" : "postcss public/css/tailwind.css -o public/css/app.css --watch"
     en los archivos pug se debe agregar los layouts con la referencia a la hoja de estilos app.css
 
+/********************************* TAILWIND ***************************************
+al ejecutarse el codigo en linea solo afecta al momento de ejecutar la clase de este archivo 
+CLASES
+    block -> display block
+    text-sm -> texto pequeños
+    uppercase -> mayuscula
+    text-gray-500 -> color del texto el numero define la opacidad
+    mb-3 -> margin bot de 3 px
+    font-bold -> negrita
+    w-full -> with todo el ancho
+
+
 pug 
     py pading
     my margin
