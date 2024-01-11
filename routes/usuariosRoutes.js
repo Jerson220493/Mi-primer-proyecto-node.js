@@ -5,7 +5,7 @@
 import express from "express"; // importamos la libreria
 import { formularioLogin, formularioRegistro, formularioRecuperarPass, registrar, confirma } from "../controllers/usuarioController.js";
 
-
+/* express soporte de manera nativa todos los tipos de routing */
 const router = express.Router();
 
 // routin primera manera de escuchar las peticiones con callbacks

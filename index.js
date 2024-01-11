@@ -24,7 +24,7 @@ try {
     console.log(error)
 }
 
-//habitar pug que es nuestra plantilla engine de este proyecto 
+// habitar pug que es nuestra plantilla engine de este proyecto 
 // con set agregamos configuracion
 app.set('view engine', 'pug');
 app.set('views', './views'); // la carpeta donde van a estar ubicadas las vistas

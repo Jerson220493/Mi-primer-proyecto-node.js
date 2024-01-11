@@ -24,9 +24,17 @@ Nodemon -> refresca el servidor local cuando hacemos cambios dependencia de desa
 const express = require('express')  // esta es la manera anterior commonjs
 import express from 'express'  // esta la manera moderna de importar las dependencias con la notacion ems6
 
+**************** ROUTIN *****************************
+donde van a transitar los usuarios los endpoints, un sitio web tiene muchas rutas
+    GET -> mostrar informacion 
+    POST -> enviar informacion 
+    PUT -> actualizar informacion 
+    DELETE -> eliminar informacion 
 
-Template engine -> Motor de plantilla son tecnologias que nos permiten crear el codigo HTML y mostrar 
-informacion contenida en variables de una forma mas completa y clara
+*************** TEMPLATE ENGINE ************************
+Motor de plantilla son tecnologias que nos permiten crear el codigo HTML y mostrar informacion contenida en variables de una forma mas completa y clara consume mas recurso del servidor, ya que todo el codigo html se estara renderizando desde el servidor, mientras que las nuevas tecnologias como react o view lo hacen directamente desde el cliente, navegador 
+    para el primer proyecto vamos a trabajar con pug __ npm i pug __ 
+
 
 Aplicaciones moloniticas -> proyectos pequeños 
 APIS -> nuevos proyectos
@@ -34,7 +42,8 @@ APIS -> nuevos proyectos
 MVC -> model view controller
 
 tailwind css 
-instalacion npm i -D tailwindcss autoprefixer postcss postcss-cli
+instalacion 
+npm i -D tailwindcss autoprefixer postcss postcss-cli
 revisar muy bien que queden bien instaladas en el package 
 en el index marcar la carpeta publica donde creamos la carpeta css
 en la carpeta css crear el archivo tailwind.css y colocar sus tres directivas
