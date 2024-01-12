@@ -10,9 +10,9 @@ import usuariosRoutes from './routes/usuariosRoutes.js' // esta importacion al n
 import db from './config/db.js';
 
 // esta variable contiene toda la informacion del servidor
-const app = express();
+const app = express(); 
 
-// habilitar lectura de datos de formulario
+// habilitar lectura de datos de formulario, sin esto no lee los datos enviados por post
 app.use( express.urlencoded({extended : true}))
 
 /** conexion a la base de datos */

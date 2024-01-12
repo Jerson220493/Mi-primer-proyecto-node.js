@@ -24,7 +24,7 @@ const registrar = async (req, res)=>{ // aca vamos a registrar un usuario nuevo
     await check('password').isLength({ min:6 }).withMessage('El password debe ser de al menos 6 caracteres').run(req);
     await check('repite_password').equals(req.body.password).withMessage('Los password no son iguales').run(req);
 
-    let resultado = validationResult(req);
+    let resultado = validationResult(req); // aca se guarda en un array los errores de las validaciones
     // validattions Result almacena los check 
 
     // validar que el resultado este vacío

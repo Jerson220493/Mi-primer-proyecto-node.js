@@ -1,11 +1,11 @@
-import { DataTypes } from "sequelize";
+import { DataTypes } from "sequelize";  // 
 import bcrypt from "bcrypt";
 import db from "../config/db.js";
 
 const Usuario = db.define("usuarios",{
     nombre:{
-        type : DataTypes.STRING,
-        allowNull : false
+        type : DataTypes.STRING,    // el tipo de dato
+        allowNull : false           // define si puede o no ir vacio
     },
     email : {
         type : DataTypes.STRING,
@@ -15,7 +15,7 @@ const Usuario = db.define("usuarios",{
         type : DataTypes.STRING,
         allowNull : false
     },
-    token : DataTypes.STRING,
+    token : DataTypes.STRING,       // asi se puede definir cuando solo lleva el tipo de dato
     confirmado : DataTypes.BOOLEAN
 },{
     hooks : {

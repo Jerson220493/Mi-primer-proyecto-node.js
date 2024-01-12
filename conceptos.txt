@@ -81,6 +81,13 @@ ORM  object Relational mapping
     instalar un ORM
          npm i sequelize mysql2
 
-variables de entorno
+en la carpeta config esta la configuracion a la conexion a la base de datos
+SHOW VARIABLES LIKE 'port'; // para validar el puerto que esta el servidor mysql 
+
+/********************** variables de entorno ***********************
+entorno de momento de desarrollo pero una vez subido esas variables cambian
+npm i dotenv
+
 express validator dependencia para validar los datos del formulario
+npm i express-validator
 hashear el password es encriptarlo eso lo hacemos en el modelo dependencia bycript
