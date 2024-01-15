@@ -3,6 +3,9 @@
 /*emascripts modules*/
 import express from 'express' // debe ir comillas en la importacion from " aca va la dependencia "
 
+import csrf from "csurf";
+import cookieParser from 'cookie-parser';
+
 /* importamos el archivo con las rutas*/
 import usuariosRoutes from './routes/usuariosRoutes.js' // esta importacion al no ser una dependiencia  debemos colocar la extension
 
@@ -14,6 +17,12 @@ const app = express();
 
 // habilitar lectura de datos de formulario, sin esto no lee los datos enviados por post
 app.use( express.urlencoded({extended : true}))
+
+// habilitar cookie parser
+app.use( cookieParser() )
+
+// habilidar csrf
+app.use(csrf({cookie:true}))
 
 /** conexion a la base de datos */
 try {

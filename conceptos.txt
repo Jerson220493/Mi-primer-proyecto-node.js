@@ -90,4 +90,15 @@ npm i dotenv
 
 express validator dependencia para validar los datos del formulario
 npm i express-validator
+
 hashear el password es encriptarlo eso lo hacemos en el modelo dependencia bycript
+npm i bcrypt
+
+/************************ emails ********************************
+nodemailer
+mailtrap{
+    las variables de conexion despues de registrar estan en el .env
+}
+
+/*********************** proteccion contra csrf
+npm i csurf cookie-parser

@@ -3,7 +3,7 @@
 */
 
 import express from "express"; // importamos la libreria
-import { formularioLogin, formularioRegistro, formularioRecuperarPass, registrar, confirma } from "../controllers/usuarioController.js";
+import { formularioLogin, formularioRegistro, formularioRecuperarPass, resetPassword, registrar, confirma, comprobarToken, nuevoPassword } from "../controllers/usuarioController.js";
 
 /* express soporte de manera nativa todos los tipos de routing */
 const router = express.Router();
@@ -25,10 +25,19 @@ const router = express.Router();
 
 // manejo del template engine
 router.get('/login', formularioLogin)
+
 router.get('/registro', formularioRegistro )
 router.post('/registro', registrar )
+// routin dinamico con los dos puntos se especifica una variable dinamica
+router.get('/confirma/:token', confirma)  // cuando el usuario da click en el enlace del correo
+
 router.get('/recuperar_pass', formularioRecuperarPass )
-router.get('/confirma/:token', confirma)
+router.post('/recuperar_pass', resetPassword )
+// almacenar el nuevo password
+router.get('/recuperar_pass/:token', comprobarToken);
+router.post('/recuperar_pass/:token', nuevoPassword);
+
+
 
 
 // router.post('/', (req, res)=>{
