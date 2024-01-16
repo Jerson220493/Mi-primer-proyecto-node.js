@@ -1,14 +1,72 @@
 import { check, validationResult } from "express-validator";
 import Usuario from "../models/Usuario.js";
 import bcrypt from "bcrypt";
-import { generateID } from "../helpers/tokens.js";
+import { generateID, generarJWT } from "../helpers/tokens.js";
 import { emailRegistro, emailOlvidePass } from "../helpers/email.js";
 
 
 const formularioLogin = (req, res)=>{
     res.render('auth/login', {
-        pagina : 'Iniciar Sesión'
+        pagina : 'Iniciar Sesión',
+        csrfToken : req.csrfToken()
     }) // render es el metodo para imprimir un template engine, como segundo parametros se puede pasar un objeto con informacion
+}
+
+const autenticar = async(req, res)=>{
+    // validacion
+    await check('email').isEmail().withMessage('El email es obligatorio').run(req);
+    await check('password').notEmpty().withMessage('El password es obligatorio').run(req);
+    let resultado = validationResult(req); 
+
+    // validar que el resultado este vacío
+    if (!resultado.isEmpty()) {
+        // errores
+        return res.render('auth/login', {
+            pagina : 'Iniciar sesion',
+            csrfToken : req.csrfToken(),
+            errores : resultado.array()
+        })
+    }
+
+    // comprobar si el usuario existe
+    const {email, password} = req.body;
+    const usuario = await Usuario.findOne({where : {email}});
+    if (!usuario) {
+        return res.render('auth/login', {
+            pagina : 'Iniciar sesion',
+            csrfToken : req.csrfToken(),
+            errores : [{msg : 'El usuario no existe'}]
+        })
+    }
+
+    // Comprobar si el usuario no esta confirmado
+    if (!usuario.confirmado) {
+        return res.render('auth/login', {
+            pagina : 'Iniciar sesion',
+            csrfToken : req.csrfToken(),
+            errores : [{msg : 'Tu cuenta no ha sido confirmada'}]
+        })
+    }
+
+    // Revisar el password
+    if(!usuario.verificarPassword(password)){
+        return res.render('auth/login', {
+            pagina : 'Iniciar sesion',
+            csrfToken : req.csrfToken(),
+            errores : [{msg : 'El password es incorrecto'}]
+        })
+    }
+
+    // Autenticar el usuario
+    const token = generarJWT({id : usuario.id, nombre : usuario.nombre})
+
+    console.log(token)
+
+    // almacenar en un cokie
+    return res.cookie('_token', token, {
+        httpOnly : true
+        // secure : true
+    }).redirect('/mis-propiedades')
 }
 
 const formularioRegistro = (req, res)=>{
@@ -216,6 +274,7 @@ const nuevoPassword = async (req, res) =>{
 /** export nombrados puede exportar varios */
 export {
     formularioLogin,
+    autenticar,
     formularioRegistro,
     formularioRecuperarPass,
     resetPassword,

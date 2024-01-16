@@ -102,3 +102,6 @@ mailtrap{
 
 /*********************** proteccion contra csrf
 npm i csurf cookie-parser
+
+/*********************** json web tokens para autenticar
+npm i jsonwebtoken
