@@ -8,6 +8,7 @@ import cookieParser from 'cookie-parser';
 
 /* importamos el archivo con las rutas*/
 import usuariosRoutes from './routes/usuariosRoutes.js' // esta importacion al no ser una dependiencia  debemos colocar la extension
+import propiedadesRoutes from './routes/propiedadesRoutes.js' // esta importacion al no ser una dependiencia  debemos colocar la extension
 
 /* importamos el archivo de conexion a la base de datos*/
 import db from './config/db.js';
@@ -47,6 +48,7 @@ app.use(express.static('public'))
 /* desde la pagina principal escuchamos el evento y lo buscamos en el archivo de rutas*/
 // app.get('/', usuariosRoutes); // cuando se usa get se busca la ruta exacta
 app.use('/auth', usuariosRoutes);  // cuando se usa use se busca patrones de ruta
+app.use('/', propiedadesRoutes);  // cuando se usa use se busca patrones de ruta
 
 // Definir un puerto y arrancar el proyecto
 const port = process.env.PORT || 3000;
