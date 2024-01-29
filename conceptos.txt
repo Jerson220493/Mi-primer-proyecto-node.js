@@ -105,3 +105,9 @@ npm i csurf cookie-parser
 
 /*********************** json web tokens para autenticar
 npm i jsonwebtoken
+
+Relaciones en sequelize 
+hasOne - relaciones uno a uno
+belongsTo  - relaciones uno a uno diferencia en sintaxis
+hasMany  - relaciones uno a muchos
+belonsgToMany -> realciones muchos a muchos
