@@ -1,7 +1,8 @@
 (function() {
 
-    const lat = 6.9878585;
-    const lng = -73.0509035;
+    const lat = document.querySelector('#lat').value || 6.9878585;
+    console.log(lat)
+    const lng = document.querySelector('#lng').value || -73.0509035;
     const mapa = L.map('mapa').setView([lat, lng ], 15);
     let marker;
 
@@ -26,7 +27,6 @@
 
         // obtener la informacion de las calles al soltar el pin 
         geocodeService.reverse().latlng(posicion, 15).run(function(error, resultado){
-            console.log(resultado)
             marker.bindPopup(resultado.address.LongLabel)
 
             //llenar los campos
