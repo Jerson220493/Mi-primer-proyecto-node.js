@@ -31,9 +31,9 @@
 
             //llenar los campos
             document.querySelector('.calle').textContent = resultado?.address?.Address ?? '';
-            document.querySelector('#calle').textContent = resultado?.address?.Address ?? '';
-            document.querySelector('#lat').textContent = resultado?.latlng?.lat ?? '';
-            document.querySelector('#lng').textContent = resultado?.latlng?.lng ?? '';
+            document.querySelector('#calle').value = resultado?.address?.Address ?? '';
+            document.querySelector('#lat').value = resultado?.latlng?.lat ?? '';
+            document.querySelector('#lng').value = resultado?.latlng?.lng ?? '';
         })
     })
 

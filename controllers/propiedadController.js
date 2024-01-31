@@ -1,6 +1,6 @@
 import {validationResult} from 'express-validator';
-import Precio from '../models/Precio.js';
-import Categoria from '../models/Categoria.js';
+import {Precio, Categoria, Propiedad} from '../models/index.js';
+
 
 const admin = (req, res) => {
     res.render('propiedades/admin',{
@@ -35,7 +35,6 @@ const guardar = async (req, res) => {
             Categoria.findAll(),
             Precio. findAll()
         ])
-        console.log(req.body)
         return res.render('propiedades/crear', {
             pagina : 'crear propiedad',
             barra : true,
@@ -45,6 +44,25 @@ const guardar = async (req, res) => {
             errores : resultado.array(),
             datos : req.body
         })
+    }
+
+    const {titulo, descripcion, habitaciones, estacionamiento, wc, calle, lat, lng, precio, categoria}  = req.body;
+    try {
+        const propiedadGuardada = await Propiedad.create({
+            titulo,
+            descripcion,
+            habitaciones,
+            estacionamiento,
+            wc,
+            calle,
+            lat,
+            lng,
+            precioId : precio,
+            categoriaId : categoria,
+            
+        })
+    } catch (error) {
+        
     }
 }
 
