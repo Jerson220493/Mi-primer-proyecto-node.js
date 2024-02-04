@@ -111,3 +111,6 @@ hasOne - relaciones uno a uno
 belongsTo  - relaciones uno a uno diferencia en sintaxis
 hasMany  - relaciones uno a muchos
 belonsgToMany -> realciones muchos a muchos
+
+// npm i dropzone --> esta dependecia para el manejo de imagenes
+// npm i multer --> esta dependencia es para que express pueda leer las imagenes que viene por formulario
