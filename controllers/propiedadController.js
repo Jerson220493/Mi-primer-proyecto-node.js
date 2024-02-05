@@ -2,9 +2,19 @@ import {validationResult} from 'express-validator';
 import {Precio, Categoria, Propiedad} from '../models/index.js';
 
 
-const admin = (req, res) => {
+const admin = async (req, res) => {
+
+    const { id } = req.usuario
+
+    const propiedades = await Propiedad.findAll({
+        where:{
+            usuarioId : id
+        }
+    })
+
     res.render('propiedades/admin',{
         pagina : "Mis propiedades",
+        propiedades
     })
 }
 
@@ -97,9 +107,42 @@ const agregarImagen = async (req, res) => {
     })
 }
 
+// funcion para almacenar las imagenes
+const almacenarImagen = async (req, res, next) => {
+    const {id} = req.params
+
+    // validar que la propiedad exista
+    const propiedad = await Propiedad.findByPk(id)
+    if (!propiedad) {
+        return res.redirect('/mis-propiedades')
+    }
+
+    // validar que la propiedad no este duplicada
+    if (propiedad.publicado) {
+        return res.redirect('/mis-propiedades')
+    }
+
+    // validar que la propiedad sea del usaurio
+    if (propiedad.usuarioId.toString() !== req.usuario.id.toString()) {
+        return res.redirect('/mis-propiedades');
+    }
+
+    try {
+        // almacenar la imagen y publicar la propiedad
+        propiedad.imagen = req.file.filename;
+        propiedad.publicado = 1;
+        await propiedad.save();
+        next();
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
 export {
     admin,
     crear,
     guardar,
-    agregarImagen
+    agregarImagen,
+    almacenarImagen
 }
