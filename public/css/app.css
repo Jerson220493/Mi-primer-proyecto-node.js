@@ -837,6 +837,9 @@ video {
   .md\:w-3\/6 {
     width: 50%;
   }
+  .md\:w-2\/3 {
+    width: 66.666667%;
+  }
   .md\:items-center {
     align-items: center;
   }
