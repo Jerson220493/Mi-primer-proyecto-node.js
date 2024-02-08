@@ -143,10 +143,102 @@ const almacenarImagen = async (req, res, next) => {
 
 }
 
+const editar = async(req, res) =>{
+
+    const {id} = req.params;
+
+    const propiedad = await Propiedad.findByPk(id)
+
+    // validar que exista la propiedad
+    if (!propiedad) {
+        return res.redirect('/mis-propiedades');
+    }
+
+    // revisar que quien visita la url sea el propietario
+    if (propiedad.usuarioId.toString() !== req.usuario.id.toString()) {
+        return res.redirect('/mis-propiedades');
+    }
+
+    // consultar modelo de precio y categoria
+    const [categorias, precios] = await Promise.all([
+        Categoria.findAll(),
+        Precio. findAll()
+    ])
+
+    res.render('propiedades/editar', {
+        pagina : 'editar propiedad',
+        csrfToken : req.csrfToken(),
+        categorias,
+        precios,
+        datos : propiedad
+    })
+}
+
+const guardarCambios = async(req, res) => {
+
+    // verificar la validacion 
+    let resultado = validationResult(req);
+    if (!resultado.isEmpty()) {
+        const [categorias, precios] = await Promise.all([
+            Categoria.findAll(),
+            Precio. findAll()
+        ])
+        console.log(req.body)
+        return res.render('propiedades/editar', {
+            pagina : 'editar propiedad',
+            csrfToken : req.csrfToken(),
+            categorias,
+            precios,
+            datos : req.body,
+            errores : resultado.array()
+        })
+    }
+
+    const {id} = req.params;
+
+    const propiedad = await Propiedad.findByPk(id)
+
+    // validar que exista la propiedad
+    if (!propiedad) {
+        return res.redirect('/mis-propiedades');
+    }
+
+    // revisar que quien visita la url sea el propietario
+    if (propiedad.usuarioId.toString() !== req.usuario.id.toString()) {
+        return res.redirect('/mis-propiedades');
+    }
+
+    // Reescribir el objeto y actualizar
+    try {
+        const {titulo, descripcion, habitaciones, estacionamiento, wc, calle, lat, lng, precio: precioId, categoria: categoriaId}  = req.body;
+        propiedad.set({
+            titulo,
+            descripcion,
+            habitaciones,
+            estacionamiento,
+            wc,
+            calle,
+            lat,
+            lng,
+            precioId,
+            categoriaId
+        })
+
+        await propiedad.save();
+        return res.redirect('/mis-propiedades');
+
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
 export {
     admin,
     crear,
     guardar,
     agregarImagen,
-    almacenarImagen
+    almacenarImagen,
+    editar,
+    guardarCambios
 }
