@@ -5,6 +5,9 @@ import {Precio, Categoria, Propiedad} from '../models/index.js';
 
 const admin = async (req, res) => {
 
+    // leer el query string
+    
+
     const { id } = req.usuario
 
     const propiedades = await Propiedad.findAll({
