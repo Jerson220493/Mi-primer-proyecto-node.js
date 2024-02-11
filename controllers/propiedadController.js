@@ -6,25 +6,57 @@ import {Precio, Categoria, Propiedad} from '../models/index.js';
 const admin = async (req, res) => {
 
     // leer el query string
+    // console.log(req.query.pagina)
+    const { pagina : paginaActual } = req.query;
+
+    // expresion regular
+    // el simbolo exponente significa que tiene que empezar con el caracter
+    // el simbolo dolar significa que tiene que tiene que terminar con el caracter final de los corchetes
+    const expresion =  /^[1-9]$/;
+    if (!expresion.test(paginaActual)) {
+        return res.redirect('/mis-propiedades?pagina=1')
+    }
+
+    try {
+        const { id } = req.usuario
+
+        // limites y offset para el paginador 
+        const limite = 5;
+        const offset = (paginaActual*limite) - limite;
+
+        const [propiedades, total] = await Promise.all([
+            Propiedad.findAll({
+                limit : limite,
+                offset,
+                where:{
+                    usuarioId : id
+                },
+                include : [
+                    { model : Categoria, as: 'categoria' },
+                    { model : Precio, as: 'precio'}
+                ]
+            }),
+            Propiedad.count({
+                where : {
+                    usuarioId : id
+                }
+            })
+        ])
+
+        res.render('propiedades/admin',{
+            pagina : "Mis propiedades",
+            propiedades,
+            csrfToken : req.csrfToken(),
+            paginas : Math.ceil(total/limite),
+            paginaActual : Number(paginaActual),
+            total,
+            offset,
+            limite
+        })
+    } catch (error) {
+        console.log(error)
+    }
     
-
-    const { id } = req.usuario
-
-    const propiedades = await Propiedad.findAll({
-        where:{
-            usuarioId : id
-        },
-        include : [
-            { model : Categoria, as: 'categoria' },
-            { model : Precio, as: 'precio'}
-        ]
-    })
-
-    res.render('propiedades/admin',{
-        pagina : "Mis propiedades",
-        propiedades,
-        csrfToken : req.csrfToken(),
-    })
 }
 
 const crear = async (req, res) => {
