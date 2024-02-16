@@ -3,3 +3,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.leaflet-container a {
+    color: #CDCED4;
+}
