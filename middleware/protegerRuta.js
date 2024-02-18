@@ -20,12 +20,11 @@ const protegerRuta = async(req, res, next) => {
         }else{
             return res.redirect('/auth/login')
         }
-
+        return next();
     } catch (error) {
         return res.clearCookie('_token').redirect('/auth/login')
     }
 
-    return next();
 }
 
 export default protegerRuta;

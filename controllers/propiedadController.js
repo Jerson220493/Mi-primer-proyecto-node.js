@@ -1,6 +1,7 @@
 import { unlink } from 'node:fs/promises'
 import {validationResult} from 'express-validator';
 import {Precio, Categoria, Propiedad} from '../models/index.js';
+import {esVendedor} from "../helpers/index.js";
 
 
 const admin = async (req, res) => {
@@ -304,7 +305,7 @@ const mostrarPropiedad = async(req, res) => {
             { model : Precio, as: 'precio'}
         ]
     })
-
+    // console.log(propiedad)
     // validar que exista la propiedad
     if (!propiedad) {
         return res.redirect('/404');
@@ -312,7 +313,49 @@ const mostrarPropiedad = async(req, res) => {
 
     res.render('propiedades/mostrar', {
         propiedad,
-        pagina : propiedad.titulo
+        pagina : propiedad.titulo,
+        csrfToken : req.csrfToken(),
+        usuario : req.usuario,
+        esVendedor : esVendedor(req.usuario?.id, propiedad.usuarioId)
+    })
+}
+
+const enviarMensaje = async(req, res) => {
+    const {id} = req.params;
+    // console.log(id)
+    const propiedad = await Propiedad.findByPk( id, {
+        include : [
+            { model : Categoria, as: 'categoria' },
+            { model : Precio, as: 'precio'}
+        ]
+    })
+    // console.log(propiedad)
+
+    // validar que exista la propiedad
+    if (!propiedad) {
+        return res.redirect('/404');
+    }
+
+    // renderizar los errores
+    // validacion 
+    let resultado = validationResult(req);
+    if (!resultado.isEmpty()) {
+        return  res.render('propiedades/mostrar', {
+            propiedad,
+            pagina : propiedad.titulo,
+            csrfToken : req.csrfToken(),
+            usuario : req.usuario,
+            esVendedor : esVendedor(req.usuario?.id, propiedad.usuarioId),
+            errores : resultado.array()
+        })
+    }
+
+    res.render('propiedades/mostrar', {
+        propiedad,
+        pagina : propiedad.titulo,
+        csrfToken : req.csrfToken(),
+        usuario : req.usuario,
+        esVendedor : esVendedor(req.usuario?.id, propiedad.usuarioId)
     })
 }
 
@@ -325,5 +368,6 @@ export {
     editar,
     guardarCambios,
     eliminar,
-    mostrarPropiedad
+    mostrarPropiedad,
+    enviarMensaje
 }
