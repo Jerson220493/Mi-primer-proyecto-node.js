@@ -3,7 +3,7 @@
 */
 
 import express from "express"; // importamos la libreria
-import { formularioLogin, autenticar, formularioRegistro, formularioRecuperarPass, resetPassword, registrar, confirma, comprobarToken, nuevoPassword } from "../controllers/usuarioController.js";
+import { formularioLogin, autenticar, formularioRegistro, formularioRecuperarPass, resetPassword, registrar, confirma, comprobarToken, nuevoPassword, cerrarSession } from "../controllers/usuarioController.js";
 
 /* express soporte de manera nativa todos los tipos de routing */
 const router = express.Router();
@@ -26,6 +26,9 @@ const router = express.Router();
 // manejo del template engine
 router.get('/login', formularioLogin)
 router.post('/login', autenticar)
+
+router.post('/cerrar-session', cerrarSession)
+
 
 router.get('/registro', formularioRegistro )
 router.post('/registro', registrar )

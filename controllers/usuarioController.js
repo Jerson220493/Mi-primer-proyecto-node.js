@@ -266,8 +266,11 @@ const nuevoPassword = async (req, res) =>{
     return res.render('auth/confirmar-cuenta', {
         pagina : 'Password Reestablecido',
         mensaje : "El password se guardo correctamente"
-    }) 
-    
+    })   
+}
+
+const cerrarSession = async (req, res) => {
+    return res.clearCookie('_token').status(200).redirect('/auth/login')
 }
 
 /** export default solo puede enviar uno */
@@ -281,5 +284,6 @@ export {
     registrar,
     confirma,
     comprobarToken,
-    nuevoPassword
+    nuevoPassword,
+    cerrarSession
 }
